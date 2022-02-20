@@ -1,0 +1,9 @@
+## Interface: 90105
+
+## Title: CRF
+## Version: 1.0.0
+## Author: vitamin
+## Notes: Calorie Raid Frames.
+## SavedVariables: CRFEnabled
+
+CRF.lua
