@@ -24,6 +24,7 @@ if classId == 5 then
         end
         local i = 1
         local hasAtonement = false
+        local timeLeft
         while true do
             local name, icon, count, debuffType, duration, expirationTime, unitCaster, canStealOrPurge, _, spellId, canApplyAura = UnitAura(frame.unit, i, "HELPFUL")
 
@@ -33,17 +34,24 @@ if classId == 5 then
 
             if spellId == 194384 and unitCaster == "player" then
                 hasAtonement = true
+                timeLeft = expirationTime - GetTime()
             end
 
             i = i + 1
         end
 
         if hasAtonement then
-            if frame.healthBar.r == 0.7 and frame.healthBar.g == 1 and frame.healthBar.b == 1 then
-                return
+            if timeLeft < 3 then
+                --frame.healthBar:SetStatusBarColor(1, 1, 1)
+                frame.healthBar:SetStatusBarColor(1, 0, 0.7)
+                frame.healthBar.r, frame.healthBar.g, frame.healthBar.b = 1, 0, 0.7
+            else
+                if frame.healthBar.r == 0.7 and frame.healthBar.g == 1 and frame.healthBar.b == 1 then
+                    return
+                end
+                frame.healthBar:SetStatusBarColor(0.7, 1, 1)
+                frame.healthBar.r, frame.healthBar.g, frame.healthBar.b = 0.7, 1, 1
             end
-            frame.healthBar:SetStatusBarColor(0.7, 1, 1)
-            frame.healthBar.r, frame.healthBar.g, frame.healthBar.b = 0.7, 1, 1
         else
             CompactUnitFrame_UpdateHealthColor(frame)
         end
