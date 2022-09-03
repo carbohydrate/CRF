@@ -19,6 +19,9 @@ end
 local className, classFilename, classId = UnitClass("player")
 if classId == 5 then
     hooksecurefunc("CompactUnitFrame_UpdateAuras", function(frame)
+        if not UnitIsConnected(frame.unit) then
+            return
+        end
         if not frame.unit or string.find(frame.unit, "target") or string.find(frame.unit, "nameplate") or string.find(frame.unit, "pet") or not crfc:IsShown() or not CRFEnabled then
             return
         end
