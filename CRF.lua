@@ -3,10 +3,6 @@ local f = CreateFrame("Frame")
 local crfm = _G["CompactRaidFrameManager"]
 local crfc = _G["CompactRaidFrameContainer"]
 
-function f:OnEvent(event, ...)
-    self[event](self, event, ...)
-end
-
 function f:ADDON_LOADED(event, addOnName)
     if addOnName == "CRF" then
         if CRFEnabled == nil then
@@ -19,12 +15,21 @@ end
 local className, classFilename, classId = UnitClass("player")
 if classId == 5 then
     hooksecurefunc("CompactUnitFrame_UpdateAuras", function(frame)
-        if not frame.unit or string.find(frame.unit, "target") or string.find(frame.unit, "nameplate") or string.find(frame.unit, "pet") or not crfc:IsShown() or not CRFEnabled then
-            return
-        end
-        if not UnitIsConnected(frame.unit) then
-            return
-        end
+        if not CRFEnabled then return end
+        if frame:IsForbidden() then return end
+        if not crfc:IsShown() then return end
+        local name = frame:GetName()
+        if not name or not name:match("^Compact") then return end
+        if not UnitIsConnected(frame.unit) then return end
+
+        -- if not UnitExists(frame.displayedUnit) then
+        --     print("not UnitExists(frame.displayedUnit)")
+        --     print(frame.unit)
+        --     return
+        -- end
+
+        if (not frame:IsVisible()) then return end
+
         local i = 1
         local hasAtonement = false
         local timeLeft
@@ -86,4 +91,3 @@ SlashCmdList.CRF = function(msg)
 end
 
 f:RegisterEvent("ADDON_LOADED")
-f:SetScript("OnEvent", f.OnEvent)
