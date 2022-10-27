@@ -21,14 +21,13 @@ if classId == 5 then
         local name = frame:GetName()
         if not name or not name:match("^Compact") then return end
         if not UnitIsConnected(frame.unit) then return end
+        if not frame:IsVisible() then return end
 
         -- if not UnitExists(frame.displayedUnit) then
         --     print("not UnitExists(frame.displayedUnit)")
         --     print(frame.unit)
         --     return
         -- end
-
-        if (not frame:IsVisible()) then return end
 
         local i = 1
         local hasAtonement = false

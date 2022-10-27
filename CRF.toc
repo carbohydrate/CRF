@@ -1,7 +1,7 @@
-## Interface: 90207
+## Interface: 100000
 
 ## Title: CRF
-## Version: 1.0.1
+## Version: 1.0.2
 ## Author: vitamin
 ## Notes: Calorie Raid Frames.
 ## SavedVariables: CRFEnabled
