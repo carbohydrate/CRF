@@ -23,7 +23,7 @@ if classId == 5 then
     hooksecurefunc("CompactUnitFrame_UpdateAuras", function(frame, unitAuraUpdateInfo)
         if not CRFEnabled then return end
         if frame:IsForbidden() then return end
-        if not crfc:IsShown() then return end
+        --if not crfc:IsShown() then return end
         local name = frame:GetName()
         if not name or not name:match("^Compact") then return end
         if not UnitIsConnected(frame.unit) then return end
@@ -74,7 +74,7 @@ if classId == 5 then
     hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(frame)
         if not CRFEnabled then return end
         if frame:IsForbidden() then return end
-        if not crfc:IsShown() then return end
+        --if not crfc:IsShown() then return end
         local name = frame:GetName()
         if not name or not name:match("^Compact") then return end
         if not UnitIsConnected(frame.unit) then return end
